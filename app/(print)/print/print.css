@@ -1,0 +1,189 @@
+/* ── The panel, struck on paper ────────────────────────────────────────────
+   Same instrument grammar as the screen — engraved designations, tick scales
+   carrying their own datum, state drawn as line pattern — inverted onto white
+   stock so it costs no ink and survives a monochrome photocopier.
+
+   Scoped to .sheet so it can never leak into the site's dark panel.          */
+
+@page {
+  size: A4;
+  margin: 14mm 15mm 12mm;
+}
+
+/* This route does not load Tailwind's preflight, so box-sizing would default
+   to content-box and every mm dimension below would silently gain its padding.
+   A 271mm page box plus 26mm of screen padding is exactly one A4 too tall,
+   which is what turns each sheet into two. */
+.sheet,
+.sheet *,
+.sheet *::before,
+.sheet *::after {
+  box-sizing: border-box;
+}
+
+.sheet ul,
+.sheet ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sheet h1,
+.sheet h2,
+.sheet h3,
+.sheet p,
+.sheet dl,
+.sheet dd,
+.sheet figure {
+  margin: 0;
+}
+
+.sheet {
+  /* Paper tones: the enamel roles inverted, not merely lightened. */
+  --p-stock: #ffffff;
+  --p-tint: #f4f3f1;
+  --p-ink: #16181b;
+  --p-ink-2: #43484e;
+  --p-ink-3: #6d747c;
+  --p-score: #c9ccd0;
+  --p-score-2: #a8adb3;
+  --p-score-3: #787f87;
+  /* The same single replaceable accent, darkened for ink on white. */
+  --p-signal: #a82b20;
+
+  background: var(--p-stock);
+  color: var(--p-ink);
+  font-size: 9.6pt;
+  line-height: 1.62;
+  word-break: keep-all;
+}
+
+/* One page of stock. Each breaks after, except the last.
+   A4 is 297mm tall; at 14mm top and 12mm bottom margins the content box is
+   271mm. The box is fixed at that height, not merely floored — a min-height
+   lets overflowing content push through onto a sheet of its own, which is how
+   an eight-page document silently becomes twelve. Overflow is clipped so a
+   too-long sheet shows up here as missing content rather than as a stray page
+   in the PDF. */
+.page {
+  position: relative;
+  height: 269mm;
+  max-height: 269mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* No forced page-break-after: the fixed height already ends the sheet, and
+     adding an explicit break emits a blank leaf after every page. */
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Nothing may be orphaned across a fold. */
+.sheet h1,
+.sheet h2,
+.sheet h3,
+.sheet figure,
+.sheet table,
+.sheet .keep {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.sheet h1,
+.sheet h2,
+.sheet h3 {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+/* Engraved designation, struck on paper. */
+.sheet .p-plate {
+  font-family: var(--font-archivo), "Pretendard Variable", Pretendard, sans-serif;
+  font-weight: 600;
+  font-stretch: 88%;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 7.4pt;
+  line-height: 1.45;
+  color: var(--p-ink-3);
+}
+
+/* Readout digits. */
+.sheet .p-readout {
+  font-family: var(--font-archivo), "Pretendard Variable", Pretendard, sans-serif;
+  font-weight: 700;
+  font-stretch: 82%;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.03em;
+  line-height: 0.88;
+}
+
+.sheet .p-tnum {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* The running foot: who this is and where the live version lives. */
+.page-foot {
+  margin-top: auto;
+  padding-top: 3mm;
+  border-top: 0.4pt solid var(--p-score);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8mm;
+}
+
+/* Force the browser to lay down the panel tints rather than dropping them. */
+.sheet * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* The preview note never occupies flow: headless PDF rendering ignores
+   @media print, so anything in flow above the first sheet becomes a blank leaf. */
+.preview-note {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 11px;
+  background: #16181b;
+  color: #e8e4dc;
+}
+
+/* Screen preview: show the sheets as pages on a desk, so the layout can be
+   checked without printing. Print itself ignores all of this. */
+@media screen {
+  body {
+    background: #2a2d31;
+    padding: 40px 0 48px;
+  }
+  .page {
+    width: 210mm;
+    padding: 14mm 15mm 12mm;
+    margin: 0 auto 18px;
+    background: var(--p-stock);
+    box-shadow: 0 2px 18px rgb(0 0 0 / 0.35);
+    outline: 1px solid var(--p-score);
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  /* The screen preview's desk padding must not survive into print: any extra
+     box above the first sheet pushes it past the page boundary and emits a
+     blank leaf. */
+  .sheet {
+    margin: 0;
+    padding: 0;
+  }
+  .page {
+    margin: 0;
+    outline: 0;
+    box-shadow: none;
+  }
+}
