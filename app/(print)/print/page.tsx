@@ -23,7 +23,7 @@ import {
   stackGroups,
 } from "@/content/projects";
 
-const TOTAL = 9;
+const TOTAL = 10;
 
 const bySlug = (s: string) => {
   const p = projects.find((x) => x.slug === s);
@@ -314,7 +314,15 @@ export default function PrintPage() {
         </div>
 
         <PSection title="구현과 검증" />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6mm" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "6mm",
+            fontSize: "8.8pt",
+            lineHeight: 1.55,
+          }}
+        >
           <div>
             <PLabel>Execution</PLabel>
             <div style={{ marginTop: "1.8mm" }}>
@@ -328,6 +336,18 @@ export default function PrintPage() {
             </div>
           </div>
         </div>
+
+        <PFoot page={5} total={TOTAL} />
+      </section>
+
+      {/* ── p6 · 남극 · 그림과 실패 보고 ───────────────────────────────── */}
+      <section className="page">
+        <p style={{ fontSize: "8pt", color: "var(--p-ink-3)" }}>
+          {cloud.org} · {cloud.period}
+        </p>
+        <h2 className="p-readout" style={{ fontSize: "13pt", marginTop: "1.4mm" }}>
+          {cloud.title} <span style={{ color: "var(--p-ink-3)" }}>· 측정</span>
+        </h2>
 
         <PSection title="결과" />
         <div style={{ display: "grid", gap: "5mm" }}>
@@ -354,27 +374,35 @@ export default function PrintPage() {
           ))}
         </div>
 
-        <PFoot page={5} total={TOTAL} />
+
+
+        <PFoot page={6} total={TOTAL} />
       </section>
 
-      {/* ── p6 · 남극 · 그림과 실패 보고 ───────────────────────────────── */}
+      {/* ── p7 · 남극 · 그림 ───────────────────────────────────────────── */}
       <section className="page">
         <p style={{ fontSize: "8pt", color: "var(--p-ink-3)" }}>
           {cloud.org} · {cloud.period}
         </p>
         <h2 className="p-readout" style={{ fontSize: "13pt", marginTop: "1.4mm" }}>
-          {cloud.title} <span style={{ color: "var(--p-ink-3)" }}>· 근거</span>
+          {cloud.title} <span style={{ color: "var(--p-ink-3)" }}>· 그림</span>
         </h2>
 
-
-        <div style={{ marginTop: "4mm", display: "grid", gap: "4mm" }}>
+        <div
+          style={{
+            marginTop: "8mm",
+            display: "grid",
+            gap: "13mm",
+            alignContent: "start",
+          }}
+        >
           {cloud.figures?.map((g, gi) => (
             <figure key={gi} className="keep">
               <div
                 style={{
                   display: "grid",
                   gridTemplateColumns: `repeat(${g.items.length}, 1fr)`,
-                  gap: "2mm",
+                  gap: "3mm",
                 }}
               >
                 {g.items.map((it) => (
@@ -391,7 +419,7 @@ export default function PrintPage() {
                       }}
                     />
                     {it.label && (
-                      <p style={{ marginTop: "1.2mm", fontSize: "7.2pt", color: "var(--p-ink-3)" }}>
+                      <p style={{ marginTop: "1.6mm", fontSize: "8pt", color: "var(--p-ink-2)" }}>
                         {it.label}
                       </p>
                     )}
@@ -400,12 +428,13 @@ export default function PrintPage() {
               </div>
               <figcaption
                 style={{
-                  marginTop: "1.8mm",
+                  marginTop: "2.6mm",
                   borderTop: "0.4pt solid var(--p-score)",
-                  paddingTop: "1.4mm",
-                  fontSize: "7.8pt",
+                  paddingTop: "2mm",
+                  fontSize: "8.4pt",
+                  lineHeight: 1.6,
                   color: "var(--p-ink-3)",
-                  maxWidth: "132mm",
+                  maxWidth: "150mm",
                 }}
               >
                 <span className="p-plate" style={{ display: "inline", marginRight: "1.4mm", color: "var(--p-ink-2)" }}>
@@ -417,7 +446,7 @@ export default function PrintPage() {
           ))}
         </div>
 
-        <PFoot page={6} total={TOTAL} />
+        <PFoot page={7} total={TOTAL} />
       </section>
 
       {/* ── p7 · 남극 · 기대와 달랐던 결과 ─────────────────────────────── */}
@@ -457,7 +486,7 @@ export default function PrintPage() {
           </div>
         </div>
 
-        <PFoot page={7} total={TOTAL} />
+        <PFoot page={8} total={TOTAL} />
       </section>
 
       {/* ── p8 · 보조 프로젝트 3건 ─────────────────────────────────────── */}
@@ -520,7 +549,7 @@ export default function PrintPage() {
           ))}
         </div>
 
-        <PFoot page={8} total={TOTAL} />
+        <PFoot page={9} total={TOTAL} />
       </section>
 
       {/* ── p9 · 배경 · 스택 · 연락처 ──────────────────────────────────── */}
@@ -602,7 +631,7 @@ export default function PrintPage() {
         </dl>
         <p style={{ marginTop: "4mm", color: "var(--p-ink-3)" }}>{site.affiliation}</p>
 
-        <PFoot page={9} total={TOTAL} />
+        <PFoot page={10} total={TOTAL} />
       </section>
     </div>
   );

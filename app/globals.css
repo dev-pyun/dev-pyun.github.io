@@ -22,13 +22,17 @@
   --score-2: #3a4048;
   --score-3: #545c66;
 
-  /* The single replaceable accent: limit marks, live switches, the datum. */
-  --signal: #c0362a; /* carries white text at 4.5:1+ */
+  /* The single replaceable accent: limit marks, live switches, the datum.
+     Currently 한화 오렌지 #F37321, the corporate mark for this application.
+     It is a FILL colour only — at 2.88:1 against white it cannot carry white
+     text, so --signal-on carries the label colour that sits on top of it. */
+  --signal: #f37321;
+  --signal-on: #17191c; /* text ON the accent: 6.11:1 against #f37321 */
   /* Derived, never hand-set: the panel stays a one-token swap. Engines without
      color-mix fall back to the accent itself rather than to a stale hue. */
   --signal-pressed: var(--signal);
-  --signal-ink: #f2857a; /* accent text on panel ground — 4.5:1+ */
-  --signal-wash: #2a1b1a;
+  --signal-ink: #ff9a5c; /* accent text on the panel ground — 8.41:1 */
+  --signal-wash: #2a1d14;
 
   --font-plate: var(--font-archivo), "Pretendard Variable", Pretendard, system-ui,
     sans-serif;
@@ -59,6 +63,7 @@
   --color-score-3: var(--score-3);
   --color-signal: var(--signal);
   --color-signal-pressed: var(--signal-pressed);
+  --color-signal-on: var(--signal-on);
   --color-signal-ink: var(--signal-ink);
   --color-signal-wash: var(--signal-wash);
   --font-plate: var(--font-plate);
@@ -89,7 +94,7 @@ body {
 /* Browser surfaces are part of the panel. */
 ::selection {
   background: var(--signal);
-  color: #fff;
+  color: var(--signal-on);
 }
 ::-webkit-scrollbar {
   width: 13px;

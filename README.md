@@ -31,7 +31,10 @@ npm run build        # out/ 에 정적 파일 생성
 
 - 문구·수치: `content/projects.ts`만 수정합니다.
 - PDF 교체: `public/portfolio.pdf`를 덮어쓰고 `main`에 push합니다.
-- 디자인 토큰: `app/globals.css`의 `:root` 변수. 강조색은 `--signal` **한 개**만 바꾸면 한계선·스위치·각인·포커스링이 모두 따라옵니다 (지원사별 대응). 나머지 색은 패널 그라운드 `--panel`, 각인 `--engrave*`, 괘선 `--score*`.
+- 디자인 토큰: `app/globals.css`의 `:root` 변수. 강조색은 `--signal` **한 개**만 바꾸면 한계선·스위치·각인·포커스링이 모두 따라옵니다 (지원사별 대응). 현재 값은 한화 오렌지 `#F37321`. 나머지 색은 패널 그라운드 `--panel`, 각인 `--engrave*`, 괘선 `--score*`.
+  - 강조색을 바꿀 때 함께 확인할 것: `--signal-on`(강조색 **위에** 올라가는 글자색)과 `--signal-ink`(패널 위 강조 글자). 둘 다 대비 4.5:1 이상이어야 합니다. `#F37321`은 흰 글자를 받지 못해(2.88:1) `--signal-on`이 잉크색입니다.
+  - 인쇄용 강조색은 `app/(print)/print/print.css`의 `--p-signal` (현재 `#B8490B` — 흰 종이에서 5.26:1).
+- PDF 생성: `npm run dev` 후 `npm run pdf` → `public/portfolio.pdf` (A4 10면).
 - 디자인 시스템 전체는 `DESIGN.md`, 제품 사실은 `PRODUCT.md`를 참고합니다.
 
 ## 공개 범위

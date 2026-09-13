@@ -48,8 +48,10 @@
   --p-score: #c9ccd0;
   --p-score-2: #a8adb3;
   --p-score-3: #787f87;
-  /* The same single replaceable accent, darkened for ink on white. */
-  --p-signal: #a82b20;
+  /* The same single replaceable accent — 한화 오렌지 — darkened for ink on
+     white stock. #F37321 itself is only 2.88:1 on paper and cannot carry body
+     text or reverse out white; #B8490B keeps the hue at 5.26:1 both ways. */
+  --p-signal: #b8490b;
 
   background: var(--p-stock);
   color: var(--p-ink);
@@ -67,8 +69,8 @@
    in the PDF. */
 .page {
   position: relative;
-  height: 269mm;
-  max-height: 269mm;
+  height: 264mm;
+  max-height: 264mm;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -125,6 +127,7 @@
 .page-foot {
   margin-top: auto;
   padding-top: 3mm;
+  padding-bottom: 1.5mm;
   border-top: 0.4pt solid var(--p-score);
   display: flex;
   justify-content: space-between;

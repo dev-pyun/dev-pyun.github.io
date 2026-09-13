@@ -244,7 +244,7 @@ export function Switch({
       className={
         "plate group inline-flex items-center gap-2.5 border px-4 py-2.5 no-underline transition-colors duration-200 " +
         (live
-          ? "border-signal bg-signal !text-white hover:bg-signal-pressed"
+          ? "border-signal bg-signal !text-signal-on hover:bg-signal-pressed"
           : "border-score-3 !text-engrave-2 hover:border-engrave-3 hover:!text-engrave")
       }
     >
@@ -253,7 +253,7 @@ export function Switch({
         className={
           "block h-2 w-2 rounded-full border " +
           (live
-            ? "border-white/70 bg-white"
+            ? "border-signal-on/50 bg-signal-on"
             : "border-score-3 group-hover:border-engrave-3")
         }
       />
